@@ -1,0 +1,6 @@
+pvporcupine
+sounddevice
+vosk
+pyttsx3
+requests
+python-dotenv
