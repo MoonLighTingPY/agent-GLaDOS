@@ -32,7 +32,7 @@ class SpeechRecognizer:
             raise
         self.sample_rate = sample_rate
 
-    def recognize(self, duration=10):
+    def recognize(self, duration=4):
         """
         Record audio for `duration` seconds and return recognized text.
         """

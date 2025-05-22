@@ -20,14 +20,15 @@ class Assistant:
         print(">> Assistant.process() invoked")
         # announce listening
         # prompt and recognize speech
-        self.tts.speak("Listening for your command.")
+        # block TTS announce so ASR stream only starts after announcement
+        self.tts.speak("Listening for your command.", blocking=True)
         print("Prompted user to speak")
         # Debug: verify Grog config
         print(f"Grog API key set: {bool(self.api_key)}, model: {self.model}")
         if not self.api_key or not self.model:
             err = "Missing Grog Cloud API key or model. Check your .env configuration."
             print(err)
-            self.tts.speak(err)
+            self.tts.speak(err, blocking=False)
             return
         text = self.recognizer.recognize()
         # Debug: print recognized user text

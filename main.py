@@ -24,7 +24,8 @@ def on_wake():
     time.sleep(0.1)
     # Prompt user and process command
     try:
-        tts.speak("Yes? How can I help?")
+        # block TTS audio to prevent ASR capturing it
+        tts.speak("Yes? How can I help?", blocking=True)
     except Exception as e:
         print(f"on_wake: tts.speak() raised: {e}", flush=True)
 
@@ -33,8 +34,24 @@ def on_wake():
     except Exception as e:
         print(f"on_wake: assistant.process() raised: {e}", flush=True)
 
-    # restart wake word detection
-    wake.start(on_wake)
+    # restart wake word detection after a brief pause to free audio device
+    time.sleep(0.1)
+    
+    # Add more robust error handling for wake word restart
+    try:
+        print("Restarting wake word detection...", flush=True)
+        wake.start(on_wake)
+        print("Wake word detection successfully restarted.", flush=True)
+    except Exception as e:
+        print(f"CRITICAL: Failed to restart wake word detection: {e}", flush=True)
+        # Try one more time after a longer delay
+        try:
+            time.sleep(0.5)
+            wake.start(on_wake)
+            print("Wake word detection restarted on second attempt.", flush=True)
+        except Exception as e2:
+            print(f"FATAL: Could not restart wake word detection: {e2}", flush=True)
+            # This could leave the program in a dead state
 
 if __name__ == "__main__":
     load_dotenv()
@@ -59,5 +76,11 @@ if __name__ == "__main__":
 
     wake.start(on_wake)
     # Keep running until interrupted
-    while True:
-        time.sleep(1)
+    try:
+        # keep the main thread alive indefinitely
+        while True:
+            time.sleep(1)
+    except KeyboardInterrupt:
+        print("Exiting…", flush=True)
+        wake.stop()
+        sys.exit(0)
