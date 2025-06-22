@@ -6,7 +6,7 @@ A modular AI assistant designed for IoT applications with smart inventory manage
 
 import os
 from dotenv import load_dotenv
-from modules.ai_assistant_core import AIAssistantCore, AIProvider
+from modules.ai_assistant.ai_assistant_core import AIAssistantCore, AIProvider
 
 def main():
     """Main application entry point"""
