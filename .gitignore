@@ -21,8 +21,9 @@ venv/
 # dotenv file
 .env
 
-# IDE / editor folders
+# IDE / editor folders - but allow settings
 .vscode/
+!.vscode/settings.json
 .idea/
 *.iml
 

@@ -8,6 +8,7 @@ Designed to be modular and easily switchable between different AI providers.
 import os
 import json
 import requests
+import re
 from typing import Dict, List, Optional, Any
 from dataclasses import dataclass
 from enum import Enum
@@ -50,11 +51,46 @@ class AIAssistantCore:
         self.conversation_history: List[AIMessage] = []
         self.system_prompt = os.getenv("SYSTEM_PROMPT", "You are a helpful AI assistant.")
         
+        # Language detection patterns (same as TTS)
+        self.language_patterns = {
+            'uk': re.compile(r'[а-яіїєґ]', re.IGNORECASE),  # Ukrainian
+            'ru': re.compile(r'[а-яё]', re.IGNORECASE),     # Russian
+            'en': re.compile(r'[a-z]', re.IGNORECASE),      # English
+        }
+        
         # Initialize provider-specific settings
         self._init_provider_config()
         
         # Add system message to conversation
         self.add_system_message(self.system_prompt)
+    
+    def detect_language(self, text: str) -> str:
+        """
+        Detect language of the input text.
+        
+        Args:
+            text: Text to analyze
+            
+        Returns:
+            Language code (uk, ru, en) or 'en' as fallback
+        """
+        if not text.strip():
+            return 'en'
+        
+        # Count characters for each language
+        lang_scores = {}
+        for lang_code, pattern in self.language_patterns.items():
+            matches = pattern.findall(text)
+            lang_scores[lang_code] = len(matches)
+        
+        # Return language with most matches
+        detected_lang = max(lang_scores, key=lang_scores.get)
+        
+        # If no clear winner or very few characters, default to English
+        if lang_scores[detected_lang] < 3:
+            detected_lang = 'en'
+        
+        return detected_lang
     
     def _init_provider_config(self):
         """Initialize configuration for the selected AI provider"""
@@ -161,8 +197,21 @@ class AIAssistantCore:
         Returns:
             AIResponse object containing the AI's response
         """
+        # Detect user's language
+        detected_lang = self.detect_language(user_input)
+        
+        # Create language-specific instruction
+        lang_instructions = {
+            'uk': "ВАЖЛИВО: Відповідай ТІЛЬКИ українською мовою. Ніяких перекладів чи інших мов.",
+            'ru': "ВАЖНО: Отвечай ТОЛЬКО на русском языке. Никаких переводов или других языков.",
+            'en': "IMPORTANT: Respond ONLY in English. No translations or other languages."
+        }
+        
+        # Add language instruction to user message
+        enhanced_input = f"{lang_instructions.get(detected_lang, lang_instructions['en'])}\n\nUser: {user_input}"
+        
         # Add user message to conversation
-        self.add_user_message(user_input)
+        self.add_user_message(enhanced_input)
         
         # Prepare messages for API
         messages = self._prepare_messages_for_api()
