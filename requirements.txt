@@ -1,7 +1,0 @@
-pvporcupine
-sounddevice
-vosk
-pyttsx3
-pywin32  # required for COM initialization on Windows
-requests
-python-dotenv
