@@ -1,6 +1,14 @@
-pvporcupine
-sounddevice
-vosk
-pyttsx3
-requests
-python-dotenv
+# Lightweight requirements optimized for Raspberry Pi
+requests>=2.31.0
+python-dotenv>=1.0.0
+
+# Text-to-Speech dependencies (lightweight and fast)
+pyttsx3>=2.90  # Cross-platform TTS engine (offline, very fast)
+gTTS>=2.3.0    # Google Text-to-Speech (online backup)
+pygame>=2.5.0  # For audio playback
+
+# Audio processing for GLaDOS vocoder (lightweight)
+numpy>=1.24.0
+scipy>=1.10.0
+soundfile>=0.12.0
+
