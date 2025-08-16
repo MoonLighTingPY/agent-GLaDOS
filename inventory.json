@@ -1,0 +1,103 @@
+{
+  "items": [
+    {
+      "name": "buck converter",
+      "location": "shelf A2, electronics section",
+      "metadata": {
+        "type": "voltage regulator",
+        "voltage": "12V to 5V"
+      },
+      "updated_at": 1755368808.3719134
+    },
+    {
+      "name": "green board",
+      "location": "shelf A2, electronics section",
+      "metadata": {
+        "type": "voltage regulator",
+        "voltage": "12V to 5V"
+      },
+      "updated_at": 1755368808.374913
+    },
+    {
+      "name": "arduino uno",
+      "location": "drawer B1, microcontrollers",
+      "metadata": {
+        "type": "development board",
+        "pins": 14
+      },
+      "updated_at": 1755368808.378913
+    },
+    {
+      "name": "raspberry pi 4",
+      "location": "drawer B2, single board computers",
+      "metadata": {
+        "type": "SBC",
+        "ram": "4GB"
+      },
+      "updated_at": 1755368808.3819125
+    },
+    {
+      "name": "breadboard",
+      "location": "drawer C1, prototyping",
+      "metadata": {
+        "type": "solderless breadboard",
+        "holes": 830
+      },
+      "updated_at": 1755368808.384914
+    },
+    {
+      "name": "soldering iron",
+      "location": "workbench, left side",
+      "metadata": {
+        "type": "tool",
+        "temp": "350°C"
+      },
+      "updated_at": 1755368808.3879123
+    },
+    {
+      "name": "multimeter",
+      "location": "workbench, drawer 2",
+      "metadata": {
+        "type": "measurement",
+        "brand": "fluke"
+      },
+      "updated_at": 1755368808.3919134
+    },
+    {
+      "name": "oscilloscope",
+      "location": "shelf D1, instruments",
+      "metadata": {
+        "type": "measurement",
+        "channels": 4
+      },
+      "updated_at": 1755368808.394912
+    },
+    {
+      "name": "resistors",
+      "location": "component box 1, shelf E",
+      "metadata": {
+        "type": "passive component",
+        "range": "1Ω to 1MΩ"
+      },
+      "updated_at": 1755368808.3979127
+    },
+    {
+      "name": "capacitors",
+      "location": "component box 2, shelf E",
+      "metadata": {
+        "type": "passive component",
+        "range": "1pF to 1000μF"
+      },
+      "updated_at": 1755368808.4021742
+    },
+    {
+      "name": "leds",
+      "location": "component box 3, shelf E",
+      "metadata": {
+        "type": "indicator",
+        "colors": "red, green, blue, white"
+      },
+      "updated_at": 1755368808.4057803
+    }
+  ]
+}

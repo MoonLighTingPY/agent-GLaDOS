@@ -7,4 +7,4 @@ it will be a camera mounted on the roof, that listens to everything, and when we
 and it should understand that the user wants to find a buck converter module, it will check the database, where it has all the items in the room and their locations,
 and point where it is in the room with a laser or smth like that, and respond. if user takes something or places somethign somewhere, it should update the database.
 the project should be written in such a way that we can use it on some small microcontroller or small computer like raspberry pi.
-code should be efficient and maintainable.
+code should be efficient, modular, and maintainable. if running a python command, never forget to use the venv, and always use the `python -m` syntax to ensure it uses the correct interpreter. also edit the .env directly, dont use `copy .env.example .env` command, just edit the existing .env file and fill it with the required variables.
